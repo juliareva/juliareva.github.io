@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кот Кокос</title>
+</head>
+<body>
+    <h1>Кот Кокос</h1>
+    <div class="description">
+        <p>Привет! Это сайт Кота Кокоса. 
+        <br>
+        <br>
+        Кокос родился летом 2018 года в Москве, а теперь живет в Лондоне. Кокос любит путешествовать, попрашайничать у мамы тунец, а также бегать от папы по квартире.</p>
+    </div>
+
+    <div class="button">
+    <button onclick="updatePicture()" id="button">Кокос дня!</button>
+    <br>
+    <br>
+    <img id="catPicture" src="./images/img-blank.png" alt="Серый милый кот"> 
+     
+    
+    </div>
+
+<script>
+    let history = [];
+    function getRandomInt(min, max) { // max not included
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    function updatePicture() {
+        let catPicture = document.getElementById('catPicture');
+        let randomNum = getRandomInt(1, 11);
+        while (true) {
+            let found = false;
+            for (let i = 0; i < history.length; ++i) {
+                if (history[i] == randomNum) {
+                    found = true;
+                }
+            }
+            if (found) {
+                randomNum = getRandomInt(1, 11);
+            } else {
+                break;
+            }
+        }
+        history.push(randomNum);
+        if (history.length > 5) {
+            history.shift();
+        }
+        
+        catPicture.src = "./images/img" + randomNum + ".JPG";
+    }
+</script>
+
+<style>
+h1, .description {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color:aliceblue;
+    background-color: rgb(22, 22, 163);
+    font-size: 32px;
+    text-align: center;
+}
+
+.description {
+    background-color: aquamarine;
+}
+
+#button {
+    background-color: yellow;
+    color: black;
+    font-size: 25px;
+    text-align: center; 
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+
+}
+
+#button:hover {
+  background-color: rgb(255, 136, 0);
+  color: white;
+}
+
+img {
+    max-width: 600px;
+    border: 8px solid aquamarine;
+    
+}
+
+body {
+    background-image: url('./images/img-background.jpg');
+    background-repeat: repeat;
+}
+</style>
+</body>
+</html>
